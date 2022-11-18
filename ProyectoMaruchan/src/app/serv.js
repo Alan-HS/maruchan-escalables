@@ -1,7 +1,15 @@
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/";
-
+var cors = require('cors');
+var mongoose = require("mongoose");
+mongoose.Promise = global.Promise;mongoose.connect("mongodb://localhost:27017/MaruchanShop");
 var respuesta;
+var nameSchema = new mongoose.Schema({
+  nombre: String,
+  precio: String
+ });
+
+ var Maruchan = mongoose.model("Maruchan", nameSchema);
 
 // Use Express
 var express = require("express");
@@ -14,7 +22,9 @@ var app = express();
 // Define the JSON parser as a default way 
 // to consume and produce data through the 
 // exposed APIs
+app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Create link to Angular build directory
 // The `ng build` command will save the result
@@ -31,7 +41,7 @@ var server = app.listen(process.env.PORT || 8080, function () {
 
 MongoClient.connect(url, function(err, db) {
     if (err) throw err;
-    var dbo = db.db("Restaurante");//Nombre base de datos
+    var dbo = db.db("MaruchanShop");//Nombre base de datos
     // var myobj = { nombre: "Torta de lomo", precio: "15" };
     // var myobj2 = { nombre: "Torta de huevo", precio: "20" };
     // var myobj3 = { nombre: "Torta de jamon", precio: "30" };
@@ -66,21 +76,21 @@ MongoClient.connect(url, function(err, db) {
     //   console.log("Number of documents inserted: " + res.insertedCount);
     //   db.close();
     // });
-    var query = { nombre: "Torta de jamon" };
-    dbo.collection("tortas").find(query).toArray(function(err, result) {
-      if (err) throw err;
-      console.log(result);
-      respuesta = result;
-      db.close();
-    });
+    // var query = { nombre: "Torta de jamon" };
+    // dbo.collection("tortas").find(query).toArray(function(err, result) {
+    //   if (err) throw err;
+    //   console.log(result);
+    //   respuesta = result;
+    //   db.close();
+    // });
 
     //ESTO ES PARA SACAR TODOS
-    // dbo.collection("tortas").find({}).toArray(function(err, result) {
-    //     if (err) throw err;
-    //     console.log(result);
-    //     respuesta = result;
-    //     db.close();
-    // });
+    dbo.collection("maruchans").find({}).toArray(function(err, result) {
+        if (err) throw err;
+        console.log(result);
+        respuesta = result;
+        db.close();
+    });
 
 
 
@@ -115,9 +125,80 @@ MongoClient.connect(url, function(err, db) {
 app.get("/", function (req, res) {
     res.status(200).json({ status: "UP" });
 });
-app.get("/tortas", function (req, res) {
+app.get("/maruchans", function (req, res) {
     res.status(200).json(respuesta);
 }); 
+
+app.post("/agregar", (req, res) => {
+  console.log(req.body);
+  var myData = new Maruchan(req.body);
+  myData.save()
+  .then(item => {
+  res.send("item saved to database");
+  })
+  .catch(err => {
+  res.status(400).send("unable to save to database");
+  });
+ });
+
+ app.delete('/:id', (req, res) => {
+  console.log(req.params.id);
+  
+  Maruchan.findByIdAndDelete(req.params.id,function(err,response){
+    if(err){
+      res.send("Error deleting");
+    }else{
+      res.send(response);
+    }
+  });
+});
+
+app.put('/actualizar', (req, res) => {
+  console.log(req.body);
+  console.log(req.body._id);
+  console.log(req.body.nombre);
+  console.log(req.body.precio);
+  // console.log(req.body.__v);
+  
+  Maruchan.findByIdAndUpdate(req.body._id,
+    {
+      $set: {nombre: req.body.nombre,precio:req.body.precio,
+        __v:0}
+    },
+    {
+      new:true
+    },
+    function(err, response2){
+      if(err){
+        res.send("Error updating");
+      }else{
+        res.send(response2);
+      }
+    }
+  );
+  // Maruchan.findByIdAndDelete(req.params.id,function(err,response){
+  //   if(err){
+  //     res.send("Error deleting");
+  //   }else{
+  //     res.send(response);
+  //   }
+  // });
+});
+
+
+// app.post("/agregar", function(req,res){
+  // MongoClient.connect(url, function(err, db) {
+  //   if (err) throw err;
+  //   var dbo = db.db("Restaurante");//Nombre base de datos
+  //   var myobj = { nombre: "Torta de lomo", precio: "1500" };
+  //   dbo.collection("tortas").insertOne(myobj, function(err, res) {
+  //         if (err) throw err;
+  //         console.log("1 document inserted");
+  //         db.close();
+  //   });  
+  
+  // });
+// });
   
   
   // MongoClient.connect(url, function(err, db) {

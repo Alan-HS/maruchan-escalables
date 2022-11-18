@@ -1,10 +1,32 @@
-<div class="input-group mb-3">
-    <form action="">
+
+  <div class="input-group mb-3 justify-content-center bg-secondary"style ="width: 1500px">
+    <form class="justify-content-center mb-2 mt-2" action="" style ="width: 800px" #form="ngForm" (ngSubmit)="subirMaruchan(form)" novalidate>
         <!-- aqui le vas a mover Ariel!!! xd -->
-        <span class="input-group-text" id="inputGroup-sizing-default">Default</span>
-        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-        <input class="btn btn-info" type="submit" value="Submit">
+        <span class=" h2 input-group justify-content-center fw-bold " id="inputGroup-sizing-default">AGREGAR MARUCHAN</span>
+        <input name="nombre" ngModel type="text" class="form-control" aria-label="Sizing example input" placeholder="NOMBRE MARUCHAN" aria-describedby="inputGroup-sizing-default">
+        <input name="precio" ngModel type="text" class="form-control" aria-label="Sizing example input" placeholder="PRECIO" aria-describedby="inputGroup-sizing-default">
+        <button class="btn btn-warning justify-content-center fw-bold"style ="width: 800px" value="SUMBIT">Subir</button>
     </form>
-    
+
+    <!-- <form class="mt-5" [formGroup]="inmuebleForm" (ngSubmit)="agregar_inmueble()" (keydown.enter)="$event.preventDefault()" id="form-create-inmueble">
+      <div class="mb-3">
+        <label for="nombre_inmueble" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="nombre_inmueble" aria-describedby="nombre_inmueble"
+               name="nombre_inmueble" formControlName="nombre_inmueble">
+      </div>
+
+      <div class="row mb-3">
+        <div class="col">
+          <label for="precio_venta" class="form-label">Precio de Venta</label>
+          <input type="text" class="form-control" id="precio_venta" aria-describedby="precio_venta"
+                 name="precio_venta" formControlName="precio_venta" placeholder="Opcional" >
+        </div>
+      </div>
+
+      <div class="float-end mt-3">
+        <button type="submit"  [disabled]="inmuebleForm.invalid" class="btn btn-primary py-2 px-4 ms-4">CREAR INMUEBLE</button>
+      </div>
+    </form> -->
+
   </div>
-<p>agregar works!</p>
+

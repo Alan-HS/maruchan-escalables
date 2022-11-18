@@ -1,11 +1,49 @@
-
-        <!-- aqui le vas a mover Ariel!!! xd -->
+ <!-- aqui le vas a mover Ariel!!! xd -->
 <ul class="list-group">
-    <li class="list-group-item">An item</li>
-    <li class="list-group-item">A second item</li>
-    <li class="list-group-item">A third item</li>
-    <li class="list-group-item">A fourth item</li>
-    <li class="list-group-item">And a fifth one</li>
-  </ul>
-<p>mostrar works!</p>
+  <li *ngFor="let item of arr" class="list-group-item">
+    <div class="card rounded-3 mb-4 mt-4 "style="background-color: #F0EAA1;">
+      <div class="card-body p-4">
+        <div class="row d-flex justify-content-between align-items-center">
+          <div class="col-md-2 col-lg-2 col-xl-2">
+            <img
+              src="https://www.kindpng.com/picc/m/410-4101842_transparent-maruchan-logo-png-instant-noodles-png-download.png"
+              class="img-fluid rounded-3" alt="Cotton T-shirt">
+          </div>
+          <div class="col-md-3 col-lg-3 col-xl-3">
+            <p class="lead fw-normal mb-2">{{item.nombre}}</p>
+          </div>
+          
+          <div class=" col-md-3 col-lg-2 col-xl-2 offset-lg-1" >
+            <h5 class="mb-0">${{item.precio}}</h5>
+          </div>
+
+          <!-- <form class="justify-content-center mb-2 mt-2" action="" style ="width: 800px" #form="ngForm" (ngSubmit)="borrarMaruchan(form)" novalidate>
+            <span class=" h2 input-group justify-content-center fw-bold " id="inputGroup-sizing-default">AGREGAR MARUCHAN</span>
+            <input name="_id" ngModel type="text" class="form-control" aria-label="Sizing example input"  aria-describedby="inputGroup-sizing-default" [value] = "item._id">
+            <button class="btn btn-warning justify-content-center fw-bold"style ="width: 800px" value="SUMBIT">ELIMINAR {{item._id}}</button>
+          </form> -->
+          <!-- <div class=" col-md-3 col-lg-2 col-xl-2 offset-lg-1" >
+            <button type="button" class="btn btn-danger">ELIMINAR</button>
+          </div> -->
+          <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+            <i (click)="editarMaruchan(item._id)" class="fas fa-trash text-danger">EDITAR</i>
+          </div>
+          <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+            <i (click)="borrarMaruchan(item._id)" class="fas fa-trash text-danger">ELIMINAR</i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+</ul>
+
+<div class="input-group mb-3 justify-content-center bg-secondary"style ="width: 1500px">
+  <form #maruchanForm="ngForm" class="justify-content-center mb-2 mt-2" action="" style ="width: 800px" (ngSubmit)="actualizarMaruchan(maruchanForm)"  novalidate>
+      <!-- aqui le vas a mover Ariel!!! xd -->
+      <span class=" h2 input-group justify-content-center fw-bold " id="inputGroup-sizing-default">EDITAR MARUCHAN</span>
+      <input name="editnombre" ngModel  type="text" class="form-control" aria-label="Sizing example input" placeholder="NOMBRE MARUCHAN" aria-describedby="inputGroup-sizing-default">
+      <input name="editprecio" ngModel  type="text" class="form-control" aria-label="Sizing example input" placeholder="PRECIO" aria-describedby="inputGroup-sizing-default">
+      <button class="btn btn-warning justify-content-center fw-bold"style ="width: 800px" value="SUMBIT">Actualizar</button>
+  </form>
+
 

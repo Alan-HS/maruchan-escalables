@@ -11,21 +11,55 @@
 </head>
 <body>
 
-  <nav class="navbar bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <img src="https://cdn.worldvectorlogo.com/logos/maruchan.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-        Maruchans
+  <nav class="navbar  navbar-expand-lg  navbar-light " style="background-color: #ca6c00;">
+    <div class="container-fluid justify-content-center">
+      <a class="navbar-brand fw-bold " href="#">
+        <img src="https://cdn.worldvectorlogo.com/logos/maruchan.svg" alt="Logo" width="30" height="30" class="d-inline-block  align-text-top" >
+        MARUCHANS
       </a>
+      <form class="navbar-form navbar-left">
+      </form>
     </div>
 
-
   </nav>
+     <!-- Button trigger modal -->
+ <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+  README
+</button>
+
+
+<!-- Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">ACERCA DE</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Este proyecto es un crud para un catalogo en linea de maruchans para crear y mostrar una lista,
+        realizado por el ingeniero Alan Edgardo Hernandez
+        Sandoval y el Semi-Ingeniero Jose Ariel Guerreo Onitveros.
+        Todos los derechos reservados van para la materia de Aplicaciones web escalables.
+        Este proyecto no fue hecho con fines de lucro ni presupuesto
+        Bajo la doctrina del fair use, está permitido usar partes de una obra intelectual ajena protegida 
+        con copyrights sin la autorización del titular de dichos derechos si se cumplen determinados requisitos.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
   <app-mostrar></app-mostrar>
 
   <br>
 
   <app-agregar></app-agregar>
+
+
+
+
 </body>
 </html>
