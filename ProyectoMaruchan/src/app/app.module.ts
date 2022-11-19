@@ -9,12 +9,14 @@ import { AppComponent } from './app.component';
 import { MaruchanService } from './maruchan.service';
 import { MostrarComponent } from './mostrar/mostrar.component';
 import { AgregarComponent } from './agregar/agregar.component';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MostrarComponent,
-    AgregarComponent
+    AgregarComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
