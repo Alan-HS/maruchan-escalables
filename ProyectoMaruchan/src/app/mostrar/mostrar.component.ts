@@ -28,17 +28,28 @@ export class MostrarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.maruchanService.getDataFromBackend().subscribe((response:any)=>{
-      console.log(response);
-      // this.id=response._id;
-      // this.nombre=response.nombre;
-      // this.precio=response.precio;
-      for (var val of response) {
-        this.arr.push(val);
-        // console.log(val); // prints values: 10, 20, 30, 40
-      }
-      console.log(this.arr);
-    });
+    this.obtenerMaruchans();
+  }
+
+  // this.maruchanService.getDataFromBackend().subscribe((response:any)=>{
+  //   console.log(response);
+  //   // this.id=response._id;
+  //   // this.nombre=response.nombre;
+  //   // this.precio=response.precio;
+  //   for (var val of response) {
+  //     this.arr.push(val);
+  //     // console.log(val); // prints values: 10, 20, 30, 40
+  //   }
+  //   console.log(this.arr);
+  // });
+
+  obtenerMaruchans(){
+    this.maruchanService.getDataFromBackend().subscribe(data =>{
+      console.log(data);
+      this.arr=data;
+    },error => {
+      console.log(error);
+    })
   }
 
   borrarMaruchan(id:any) {
@@ -53,6 +64,7 @@ export class MostrarComponent implements OnInit {
     console.log(this.m2);
 
     this.maruchanService.borrar_mar(this.m2).subscribe(data  =>{
+      this.obtenerMaruchans();
     },error => {
       console.log(error);
     })
@@ -80,6 +92,7 @@ export class MostrarComponent implements OnInit {
     this.m3.precio = form2.value.editprecio;
     console.log(this.m3);
     this.maruchanService.actualizar_mar(this.m3).subscribe(data  =>{
+      this.obtenerMaruchans();
     },error => {
       console.log(error);
     })

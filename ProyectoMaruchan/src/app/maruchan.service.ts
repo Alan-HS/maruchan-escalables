@@ -14,8 +14,9 @@ export class MaruchanService {
 
   constructor(private http:HttpClient) { }
 
-  public getDataFromBackend():Observable<Object>{
-    return this.http.get('http://localhost:8080/maruchans');
+  public getDataFromBackend():Observable<any>{
+    // return this.http.get('http://localhost:8080/maruchans');
+    return this.http.get('http://localhost:8080/obtener');
   }
 
   public agregar_mar(maruchan:Maruchan):Observable<any>{

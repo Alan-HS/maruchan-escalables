@@ -87,7 +87,7 @@ MongoClient.connect(url, function(err, db) {
     //ESTO ES PARA SACAR TODOS
     dbo.collection("maruchans").find({}).toArray(function(err, result) {
         if (err) throw err;
-        console.log(result);
+        // console.log(result);
         respuesta = result;
         db.close();
     });
@@ -128,6 +128,17 @@ app.get("/", function (req, res) {
 app.get("/maruchans", function (req, res) {
     res.status(200).json(respuesta);
 }); 
+
+app.get("/obtener", function(req,res){
+  Maruchan.find({}).exec(function(err,maruchans){
+    if(err){
+      console.log("Error retrieving data");
+    }else{
+      res.json(maruchans);
+      console.log(maruchans);
+    }
+  });
+});
 
 app.post("/agregar", (req, res) => {
   console.log(req.body);
